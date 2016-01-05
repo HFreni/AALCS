@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/HFreni/AALCS/issues"
   },
-  "homepage": "https://github.com/HFreni/AALCS#readme"
+  "homepage": "https://github.com/HFreni/AALCS#readme",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
 }
