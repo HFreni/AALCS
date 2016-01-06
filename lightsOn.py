@@ -4,6 +4,7 @@ import requests
 payload = {"power": "on", "color": "rgb:255,255,255", "brightness": 0.50}
 
 token = sys.argv[1]
+mode = sys.argv[2]
 
 r = requests.get('https://api.lifx.com/v1/lights/all', auth=(token, ''))
 
@@ -22,10 +23,10 @@ def rom():
     print g.headers
     print g.content
     print new
-
-
-allon()
-rom()
+if mode == "allon" :
+    allon()
+elif mode == "rom" :
+    rom()
 
 print r.status_code
 print r.headers
