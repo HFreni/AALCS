@@ -1,40 +1,52 @@
 import sys
 import requests
+import time
 
 #TODO: Add All Stuff to Crontab
 #Refactor & Add More Modes
 #afplay plays music, music solely intended for personal listening, I own a copy, just made it into wav file.
 
-payload = {"power": "on", "color": "rgb:255,255,255", "brightness": 0.50}
+#Configs
+allOn={"power":"on", "color":"rgb:255,255,255", "brightness":1}
+allOff={"power":"off"}
+rom={"power":"on", "color":"rgb:255,0,0", "brightness":.50}
+codeRed={"power":"on", "color":"rgb:255,0,0", "brightness":1}
+rainDay={"power":"on"}
+wakeUp={"power":"on"}
 
+#CLI Tokens
 token = sys.argv[1]
 mode = sys.argv[2]
 
-r = requests.get('https://api.lifx.com/v1/lights/all', auth=(token, ''))
+#ForDebug
+auth= requests.get('https://api.lifx.com/v1/lights/all', auth=(token, ''))
 
-def allon():
-    payload = {"power": "on", "color": "rgb:255,255,255",  "brightness": 0.80}
-    c = requests.put('https://api.lifx.com/v1/lights/all/state', data=payload,  auth=(token, ''))
+def sendReq(payload):
+    c = requests.put('https://api.lifx.com/v1/lights/all/state', data=payload, auth=(token, ''))
+    #For Debugging
     print c.status_code
     print c.headers
     print c.content
     print payload
 
-def rom():
-    new = {"power": "on", "color": "rgb:255,0,0", "brightness": 0.50}
-    g = requests.put('https://api.lifx.com/v1/lights/all/state', data=new, auth=(token, ''))
-    print g.status_code
-    print g.headers
-    print g.content
-    print new
+def lightsOn():
+    sendReq(allOn)
+
+def romA():
+    sendReq(rom)
+
+def cr():
+    while True:
+        sendReq(codeRed)
+        time.sleep(10)
+        sendReq(allOff)
+        time.sleep(10)
 
 
 if mode == "allon" :
     allon()
 elif mode == "rom" :
     rom()
-
-print r.status_code
-print r.headers 
-print r.content
+elif mode == "codeRed":
+    cr()
 
