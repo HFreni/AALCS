@@ -44,9 +44,9 @@ def cr():
 
 
 if mode == "allon" :
-    allon()
+    lightsOn()
 elif mode == "rom" :
-    rom()
+    romA()
 elif mode == "codeRed":
     cr()
 
