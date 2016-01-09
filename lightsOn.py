@@ -1,6 +1,10 @@
 import sys
 import requests
 
+#TODO: Add All Stuff to Crontab
+#Refactor & Add More Modes
+#afplay plays music, music solely intended for personal listening, I own a copy, just made it into wav file.
+
 payload = {"power": "on", "color": "rgb:255,255,255", "brightness": 0.50}
 
 token = sys.argv[1]
@@ -23,12 +27,14 @@ def rom():
     print g.headers
     print g.content
     print new
+
+
 if mode == "allon" :
     allon()
 elif mode == "rom" :
     rom()
 
 print r.status_code
-print r.headers
+print r.headers 
 print r.content
 
