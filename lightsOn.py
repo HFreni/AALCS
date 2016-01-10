@@ -38,9 +38,9 @@ def romA():
 def cr():
     while True:
         sendReq(codeRed)
-        time.sleep(10)
+        time.sleep(2)
         sendReq(allOff)
-        time.sleep(10)
+        time.sleep(2)
 
 
 if mode == "allon" :
