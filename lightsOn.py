@@ -5,6 +5,7 @@ import time
 #TODO: Add All Stuff to Crontab
 #Refactor & Add More Modes
 #afplay plays music, music solely intended for personal listening, I own a copy, just made it into wav file.
+#Clean This Shit Up
 
 #Configs
 allOn={"power":"on", "color":"rgb:255,255,255", "brightness":1}
@@ -41,7 +42,6 @@ def cr():
         time.sleep(2)
         sendReq(allOff)
         time.sleep(2)
-
 
 if mode == "allon" :
     lightsOn()
