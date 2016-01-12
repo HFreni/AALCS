@@ -6,6 +6,7 @@ import time
 #Refactor & Add More Modes
 #afplay plays music, music solely intended for personal listening, I own a copy, just made it into wav file.
 #Clean This Shit Up
+# cron 30 5 * * * wakeup.sh
 
 #Configs
 allOn={"power":"on", "color":"rgb:255,255,255", "brightness":1}
@@ -19,11 +20,15 @@ wakeUp={"power":"on"}
 token = sys.argv[1]
 mode = sys.argv[2]
 
-#ForDebug
-auth= requests.get('https://api.lifx.com/v1/lights/all', auth=(token, ''))
+#Selector Modes
+selector = "all"
 
+#ForDebug
+auth= requests.get('https://api.lifx.com/v1/lights/' + selector, auth=(token, ''))
+
+# Main Request Method
 def sendReq(payload):
-    c = requests.put('https://api.lifx.com/v1/lights/all/state', data=payload, auth=(token, ''))
+    c = requests.put('https://api.lifx.com/v1/lights/' + selector + '/state', data=payload, auth=(token, ''))
     #For Debugging
     print c.status_code
     print c.headers
@@ -49,4 +54,3 @@ elif mode == "rom" :
     romA()
 elif mode == "codeRed":
     cr()
-
