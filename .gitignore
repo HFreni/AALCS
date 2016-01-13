@@ -64,3 +64,14 @@ target/
 
 #API Keys
 .api_keys
+
+#ShellScript
+allon.sh
+day.sh
+late.sh
+list.sh
+night.sh
+rom.sh
+school.sh
+wakeUp.sh
+
