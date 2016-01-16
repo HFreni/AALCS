@@ -15,7 +15,8 @@ rom={"power":"on", "color":"rgb:255,0,0", "brightness":.50}
 codeRed={"power":"on", "color":"rgb:255,0,0", "brightness":1}
 sleep={"power":"on", "color":"rgb:255,255,255", "brightness":0.25}
 dayIsh={"power":"on", "color":"kelvin:3500", "brightness":0.90}
-grind={"power":"on", "color":"kelvin:3500","brightness":"0.50"}
+grind={"power":"on", "color":"kelvin:3500","brightness":0.50}
+prep={"power":"on", "color":"kelvin:3500","brightness":0.03}
 
 #CLI Tokens
 token = sys.argv[1]
@@ -29,7 +30,7 @@ auth= requests.get('https://api.lifx.com/v1/lights/' + selector, auth=(token, ''
 
 # Main Request Method
 def sendReq(payload):
-    c = requests.put('https://api.lifx.com/v1/lights/' + selector + '/state', data=payload, auth=(token, ''))
+    c = requests.put('https://api.lifx.com/v1/lights/all/state', data=payload, auth=(token, ''))
     #For Debugging
     print c.status_code
     print c.headers
@@ -63,13 +64,16 @@ def school():
 def nightGrind():
     sendReq(grind)
 
+def prepare():
+    sendReq(prep)
+
 def listlights():
     print auth.status_code
     print auth.content
 
 if mode == "allon" :
     lightsOn()
-elif mode == "rom" :
+elif mode == "rom":
     romA()
 elif mode == "codeRed":
     cr()
@@ -83,3 +87,5 @@ elif mode == "school":
     school()
 elif mode == "late":
     nightGrind()
+elif mode == "prep":
+    prepare()
