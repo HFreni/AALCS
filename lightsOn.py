@@ -5,7 +5,6 @@ import time
 #TODO: Add All Stuff to Crontab
 #Refactor & Add More Modes
 #afplay plays music, music solely intended for personal listening, I own a copy, just made it into wav file.
-#Clean This Shit Up
 # cron 30 5 * * * wakeup.sh
 
 #Configs
@@ -26,66 +25,41 @@ mode = sys.argv[2]
 selector = "all"
 
 #ForDebug
-auth= requests.get('https://api.lifx.com/v1/lights/' + selector, auth=(token, ''))
+auth = requests.get('https://api.lifx.com/v1/lights/' + selector, auth=(token, ''))
+
+if auth.status_code = "207":
+    print("Connected Successfully")
+else:
+    print("Failed to Connect")
 
 # Main Request Method
 def sendReq(payload):
     c = requests.put('https://api.lifx.com/v1/lights/all/state', data=payload, auth=(token, ''))
-    #For Debugging
-    print c.status_code
-    print c.headers
-    print c.content
-    print payload
+    if c.status_code = "207":
+        print("Successful")
+    else:
+        print("Failed")
 
-def lightsOn():
-    sendReq(allOn)
-
-def romA():
-    sendReq(rom)
-
-def cr():
-    while True:
-        sendReq(codeRed)
-        time.sleep(2)
-        sendReq(allOff)
-        time.sleep(2)
-
-def nightTime():
-    sendReq(sleep)
-    time.sleep(240)
-    sendReq(allOff)
-
-def dayTime():
-    sendReq(dayIsh)
-
-def school():
-    sendReq(allOff)
-
-def nightGrind():
-    sendReq(grind)
-
-def prepare():
-    sendReq(prep)
-
+#Show All Connected Lights
 def listlights():
     print auth.status_code
     print auth.content
 
+
+#Send The Requests Based on CLI Input.
 if mode == "allon" :
-    lightsOn()
+    sendReq(allOn)
 elif mode == "rom":
-    romA()
-elif mode == "codeRed":
-    cr()
+    sendReq(rom)
 elif mode == "list":
     listlights()
 elif mode == "night":
-    nightTime()
+    sendReq(allOff)
 elif mode == "day":
-    dayTime()
+    sendReq(dayIsh)
 elif mode == "school":
-    school()
+    sendReq(allOff)
 elif mode == "late":
-    nightGrind()
+    sendReq(grind)
 elif mode == "prep":
-    prepare()
+    sendReq(prep)
