@@ -2,10 +2,8 @@ import sys
 import requests
 import time
 
-#TODO: Add All Stuff to Crontab
-#Refactor & Add More Modes
-#afplay plays music, music solely intended for personal listening, I own a copy, just made it into wav file.
-# cron 30 5 * * * wakeup.sh
+#TODO: Add json & base64 decoder so I can somewhat securely store data on the server's side.
+#TODO: Migrate this to a backend system, so I can make personal API calls to a server.
 
 #Configs
 allOn={"power":"on", "color":"rgb:255,255,255", "brightness":1}
@@ -44,7 +42,6 @@ def sendReq(payload):
 def listlights():
     print auth.status_code
     print auth.content
-
 
 #Send The Requests Based on CLI Input.
 if mode == "allon" :
