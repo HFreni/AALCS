@@ -35,4 +35,3 @@ def b64D(dataOutput):
 yobro = base64.b64encode('Andre is a fuckwit')
 print(yobro)
 print(base64.b64decode(yobro))
-#base64.b64decode()
