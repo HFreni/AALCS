@@ -5,7 +5,7 @@ import time
 #TODO: Add json & base64 decoder so I can somewhat securely store data on the server's side.
 #TODO: Migrate this to a backend system, so I can make personal API calls to a server.
 
-#Configs
+#Light Configurations
 allOn={"power":"on", "color":"rgb:255,255,255", "brightness":1}
 allOff={"power":"off"}
 rom={"power":"on", "color":"rgb:255,0,0", "brightness":.50}
@@ -19,21 +19,23 @@ prep={"power":"on", "color":"kelvin:3500","brightness":0.03}
 token = sys.argv[1]
 mode = sys.argv[2]
 
-#Selector Modes
-selector = "all"
+#Global Variables Modes
+apiURL = 'https://api.lifx.com/v1/lights/'
+connectorSegment = '/state'
+selector = 'all'
 
 #ForDebug
-auth = requests.get('https://api.lifx.com/v1/lights/' + selector, auth=(token, ''))
+auth = requests.get(apiURL + selector, auth=(token, ''))
 
-if auth.status_code = "207":
+if auth.status_code == 200:
     print("Connected Successfully")
 else:
     print("Failed to Connect")
 
 # Main Request Method
 def sendReq(payload):
-    c = requests.put('https://api.lifx.com/v1/lights/all/state', data=payload, auth=(token, ''))
-    if c.status_code = "207":
+    c = requests.put(apiURL + selector + connectorSegment, data=payload, auth=(token, ''))
+    if c.status_code == 207:
         print("Successful")
     else:
         print("Failed")
