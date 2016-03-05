@@ -16,8 +16,7 @@ grind={"power":"on", "color":"kelvin:3500","brightness":0.50}
 prep={"power":"on", "color":"kelvin:3500","brightness":0.03}
 
 #CLI Tokens
-token = sys.argv[1]
-mode = sys.argv[2]
+token = #TOKEN
 
 #Global Variables Modes
 apiURL = 'https://api.lifx.com/v1/lights/'
@@ -44,6 +43,8 @@ def sendReq(payload):
 def listlights():
     print auth.status_code
     print auth.content
+
+mode = input("Set Light Mode, It can be:\nallon\nrom\nlist\nnight\nday\nschool\nlate\nprep")
 
 #Send The Requests Based on CLI Input.
 if mode == "allon" :

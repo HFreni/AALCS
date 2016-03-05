@@ -31,7 +31,3 @@ def b64E(data):
 def b64D(dataOutput):
     # 1. Decode the Base64
     base64.b64decode(dataOutput)
-
-yobro = base64.b64encode('Andre is a fuckwit')
-print(yobro)
-print(base64.b64decode(yobro))
